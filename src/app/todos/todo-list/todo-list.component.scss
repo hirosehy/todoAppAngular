@@ -1,18 +1,17 @@
 ul {
-    list-style: none;
-    padding: 0;
-    .input-todo {
-      margin: 10px;
-      vertical-align: middle;
-      .radio-container {
-        width: 20px;
-        display: inline-block;
-      }
-      input[type="text"] {
-        width: 90%;
-        border-width: 0 0 1px;
-        font-size: 20px;
-      }
-    }  
-  }
-  
+  list-style: none;
+  padding: 0;
+  .input-todo {
+    margin: 10px;
+    vertical-align: middle;
+    .radio-container {
+      width: 20px;
+      display: inline-block;
+    }
+    input[type="text"] {
+      width: 90%;
+      border-width: 0 0 1px;
+      font-size: 20px;
+    }
+  }  
+}

@@ -8,6 +8,5 @@
     Done
   </label>
 </div>
-<app-todo-list *ngIf="select === 'todo'" [todos]="todos"></app-todo-list>
-<app-done-list *ngIf="select === 'done'"></app-done-list>
-
+<app-todo-list *ngIf="select === 'todo'" [list]="todos"></app-todo-list>
+<app-todo-list *ngIf="select === 'done'" [list]="dones"></app-todo-list>

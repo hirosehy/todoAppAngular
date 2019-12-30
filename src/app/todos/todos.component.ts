@@ -9,12 +9,13 @@ import { TODOS } from '../mock-todos'
 export class TodosComponent implements OnInit {
   @Input() test: string
 
-  todos = TODOS
+  todos = TODOS.filter(t => !t.done)
+  dones = TODOS.filter(t => t.done)
   select: 'todo' | 'done' = 'todo'
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.test)
+    console.log(this.test)    
   }
 }
