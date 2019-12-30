@@ -8,6 +8,7 @@ import { Todo } from '../../todo'
 })
 export class TodoListComponent implements OnInit {
   @Input() list: Todo[]
+  @Input() state: 'todo' | 'done'
 
   showAddRadio = false
   addText = ''
