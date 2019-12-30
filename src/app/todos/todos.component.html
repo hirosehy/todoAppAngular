@@ -13,7 +13,7 @@
       <div class="radio-container">
         <input type="radio" *ngIf="showAddRadio" />
       </div>
-      <input type="text" appAutofocus (focus)="setShowAddRadio(true)" (blur)="setShowAddRadio(false)" />
+      <input type="text" appAutofocus (focus)="setShowAddRadio(true)" (blur)="onAddBlur($event.target.value)" />
     </div>
   </li>
 </ul>
