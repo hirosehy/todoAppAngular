@@ -48,4 +48,9 @@ export class TodosComponent implements OnInit {
     }
     this.setShowAddRadio(false)
   }
+
+  onUpdateBlur(id, content) {
+    const index = this.todos.findIndex(f => f.id === id)
+    this.todos[index].content = content
+  }
 }

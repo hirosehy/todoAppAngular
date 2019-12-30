@@ -5,7 +5,11 @@
       <div class="radio-container">
         <input type="radio" (change)="done(todo.id)" />
       </div>
-      <input type="text" [value]="todo.content" />
+      <input
+        type="text"
+        [value]="todo.content"
+        (blur)="onUpdateBlur(todo.id, $event.target.value)"
+      />
     </div>
   </li>
   <li>
