@@ -25,4 +25,29 @@ export class TodosComponent implements OnInit {
     }
     this.dones = this.dones.filter(d => d.id !== id)
   }
+
+  onUpdateBlur(event) {
+    const index = this.todos.findIndex(f => f.id === event.id)
+    this.todos[index].content = event.content
+  }
+
+  idGenerate() {
+    while(true) {
+      const string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      const number = 16
+      const id = Array.from(Array(number)).map(() => string[Math.floor(Math.random()*string.length)]).join('')
+      const find = this.dones.some(t => t.id === id)
+      if (!find) return id
+    }
+  }
+
+  onAddBlur(value) {
+    if (value) {
+      this.todos = this.todos.concat({
+        id: this.idGenerate(),
+        content: value,
+        created: new Date()
+      })  
+    }
+  }
 }

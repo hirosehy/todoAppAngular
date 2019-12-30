@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../../todo'
 
+interface EmitUpdateBlur {
+  id: string
+  content: string
+}
+
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
@@ -11,6 +16,8 @@ export class TodoListComponent implements OnInit {
   @Input() state: 'todo' | 'done'
 
   @Output() onClick = new EventEmitter<string>()
+  @Output() emitUpdateBlur = new EventEmitter<EmitUpdateBlur>()
+  @Output() emitAddBlur = new EventEmitter<string>()
 
   showAddRadio = false
   addText = ''
@@ -28,31 +35,13 @@ export class TodoListComponent implements OnInit {
     this.showAddRadio = show
   }
 
-  idGenerate() {
-    while(true) {
-      const string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-      const number = 16
-      const id = Array.from(Array(number)).map(() => string[Math.floor(Math.random()*string.length)]).join('')
-      const find = this.list.some(t => t.id === id)
-      if (!find) return id
-    }
-  }
-
   onAddBlur(value: string) {
-    if (value) {
-      this.list = this.list.concat({
-        id: this.idGenerate(),
-        content: value,
-        created: new Date()
-      })
-      this.addText = ''
-    }
     this.setShowAddRadio(false)
+    this.emitAddBlur.emit(value)
+    this.addText = ''
   }
 
   onUpdateBlur(id, content) {
-    const index = this.list.findIndex(f => f.id === id)
-    this.list[index].content = content
+    this.emitUpdateBlur.emit({ id: id, content: content })
   }
-
 }
