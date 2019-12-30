@@ -18,4 +18,11 @@ export class TodosComponent implements OnInit {
   ngOnInit() {
     console.log(this.test)    
   }
+
+  onRadioClick(id) {
+    if (this.select === 'todo') {
+      this.todos = this.todos.filter(t => t.id !== id)
+    }
+    this.dones = this.dones.filter(d => d.id !== id)
+  }
 }

@@ -8,5 +8,5 @@
     Done
   </label>
 </div>
-<app-todo-list *ngIf="select === 'todo'" [list]="todos" [state]="select"></app-todo-list>
-<app-todo-list *ngIf="select === 'done'" [list]="dones" [state]="select"></app-todo-list>
+<app-todo-list *ngIf="select === 'todo'" [list]="todos" [state]="select" (onClick)="onRadioClick($event)"></app-todo-list>
+<app-todo-list *ngIf="select === 'done'" [list]="dones" [state]="select" (onClick)="onRadioClick($event)"></app-todo-list>

@@ -1,14 +1,14 @@
 <ul>
-  <li *ngFor="let todo of list">
+  <li *ngFor="let l of list">
     <div class="input-todo">
       <div class="radio-container">
-        <input type="radio" (change)="done(todo.id)" [checked]="state === 'done'" />
+        <input type="radio" (click)="onRadioClick(l.id)" [checked]="state === 'done'" />
       </div>
       <input
         type="text"
-        [value]="todo.content"
+        [value]="l.content"
         [disabled]="state === 'done'"
-        (blur)="onUpdateBlur(todo.id, $event.target.value)"
+        (blur)="onUpdateBlur(l.id, $event.target.value)"
       />
     </div>
   </li>

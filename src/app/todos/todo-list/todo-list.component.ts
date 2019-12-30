@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../../todo'
 
 @Component({
@@ -10,6 +10,8 @@ export class TodoListComponent implements OnInit {
   @Input() list: Todo[]
   @Input() state: 'todo' | 'done'
 
+  @Output() onClick = new EventEmitter<string>()
+
   showAddRadio = false
   addText = ''
 
@@ -18,8 +20,8 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
   }
 
-  done(id: string) {
-    this.list = this.list.filter(t => t.id !== id)
+  onRadioClick(id: string) {
+    this.onClick.emit(id)
   }
 
   setShowAddRadio(show: boolean) {
