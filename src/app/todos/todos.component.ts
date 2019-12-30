@@ -15,4 +15,7 @@ export class TodosComponent implements OnInit {
   ngOnInit() {
   }
 
+  done(id: string) {
+    this.todos = this.todos.filter(t => t.id !== id)
+  }
 }

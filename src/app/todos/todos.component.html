@@ -2,7 +2,7 @@
 <ul>
   <li *ngFor="let todo of todos">
     <div class="input-todo">
-      <input type="radio" />
+      <input type="radio" (change)="done(todo.id)" />
       <input type="text" [value]="todo.content" />
     </div>
   </li>
