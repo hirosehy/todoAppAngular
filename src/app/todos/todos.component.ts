@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TODOS } from '../mock-todos'
 
 @Component({
@@ -7,13 +7,16 @@ import { TODOS } from '../mock-todos'
   styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent implements OnInit {
+  @Input() test: string
 
   todos = TODOS
   showAddRadio = false
+  addText = "few"
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.test)
   }
 
   done(id: string) {

@@ -8,12 +8,18 @@
       <input type="text" [value]="todo.content" />
     </div>
   </li>
+  {{ addText }}
   <li>
     <div class="input-todo">
       <div class="radio-container">
         <input type="radio" *ngIf="showAddRadio" />
       </div>
-      <input type="text" appAutofocus (focus)="setShowAddRadio(true)" (blur)="onAddBlur($event.target.value)" />
+      <input
+        type="text"
+        (focus)="setShowAddRadio(true)"
+        (blur)="onAddBlur($event.target.value)"
+        appAutofocus
+      />
     </div>
   </li>
 </ul>
