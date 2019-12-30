@@ -9,6 +9,7 @@ import { TODOS } from '../mock-todos'
 export class TodosComponent implements OnInit {
 
   todos = TODOS
+  showAddRadio = false
 
   constructor() { }
 
@@ -17,5 +18,9 @@ export class TodosComponent implements OnInit {
 
   done(id: string) {
     this.todos = this.todos.filter(t => t.id !== id)
+  }
+
+  setShowAddRadio(show: boolean) {
+    this.showAddRadio = show
   }
 }

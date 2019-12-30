@@ -2,14 +2,18 @@
 <ul>
   <li *ngFor="let todo of todos">
     <div class="input-todo">
-      <input type="radio" (change)="done(todo.id)" />
+      <div class="radio-container">
+        <input type="radio" (change)="done(todo.id)" />
+      </div>
       <input type="text" [value]="todo.content" />
     </div>
   </li>
   <li>
     <div class="input-todo">
-      <input type="radio" />
-      <input type="text" appAutofocus />
+      <div class="radio-container">
+        <input type="radio" *ngIf="showAddRadio" />
+      </div>
+      <input type="text" appAutofocus (focus)="setShowAddRadio(true)" (blur)="setShowAddRadio(false)" />
     </div>
   </li>
 </ul>
