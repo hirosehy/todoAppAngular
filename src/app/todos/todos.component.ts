@@ -12,7 +12,6 @@ export class TodosComponent implements OnInit {
   @Input() test: string
 
   todos: Todo[] = []
-  dones: Todo[] = []
   select: 'todo' | 'done' = 'todo'
 
   constructor(
@@ -28,20 +27,28 @@ export class TodosComponent implements OnInit {
     this.todos = JSON.parse(getTodos)
   }
 
-  onRadioClick(id) {
+  get list() {
     if (this.select === 'todo') {
-      // this.todos = this.todos.filter(t => t.id !== id)
-      const index = this.todos.findIndex(t => t.id === id)
-      this.todos[index].done = new Date()
-
-      this.cookieService.set('todos', JSON.stringify(this.todos))
+      return this.todos.filter(t => !t.done)
     }
-    this.dones = this.dones.filter(d => d.id !== id)
+    return this.todos.filter(t => t.done)
+  }
+
+  onRadioClick(id) {
+    const index = this.todos.findIndex(t => t.id === id)
+    if (this.select === 'todo') {
+      this.todos[index].done = new Date()
+      this.cookieService.set('todos', JSON.stringify(this.todos))
+      return
+    }
+    this.todos[index].done = undefined
+    this.cookieService.set('todos', JSON.stringify(this.todos))
   }
 
   onUpdateBlur(event) {
     const index = this.todos.findIndex(f => f.id === event.id)
     this.todos[index].content = event.content
+    this.cookieService.set('todos', JSON.stringify(this.todos))
   }
 
   idGenerate() {
@@ -49,7 +56,7 @@ export class TodosComponent implements OnInit {
       const string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       const number = 16
       const id = Array.from(Array(number)).map(() => string[Math.floor(Math.random()*string.length)]).join('')
-      const find = this.dones.some(t => t.id === id)
+      const find = this.todos.some(t => t.id === id)
       if (!find) return id
     }
   }
