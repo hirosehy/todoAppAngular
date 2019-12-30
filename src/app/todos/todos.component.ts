@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TODOS } from '../mock-todos'
+// import { TODOS } from '../mock-todos'
+import { Todo } from '../todo'
+import { CookieService } from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-todos',
@@ -9,19 +11,30 @@ import { TODOS } from '../mock-todos'
 export class TodosComponent implements OnInit {
   @Input() test: string
 
-  todos = TODOS.filter(t => !t.done)
-  dones = TODOS.filter(t => t.done)
+  todos: Todo[] = []
+  dones: Todo[] = []
   select: 'todo' | 'done' = 'todo'
 
-  constructor() { }
+  constructor(
+    private cookieService: CookieService
+  ) { }
 
   ngOnInit() {
-    console.log(this.test)    
+    const getTodos = this.cookieService.get('todos')
+    if (!getTodos) {
+      this.cookieService.set('todos', JSON.stringify([]))
+      return
+    }
+    this.todos = JSON.parse(getTodos)
   }
 
   onRadioClick(id) {
     if (this.select === 'todo') {
-      this.todos = this.todos.filter(t => t.id !== id)
+      // this.todos = this.todos.filter(t => t.id !== id)
+      const index = this.todos.findIndex(t => t.id === id)
+      this.todos[index].done = new Date()
+
+      this.cookieService.set('todos', JSON.stringify(this.todos))
     }
     this.dones = this.dones.filter(d => d.id !== id)
   }
@@ -47,7 +60,8 @@ export class TodosComponent implements OnInit {
         id: this.idGenerate(),
         content: value,
         created: new Date()
-      })  
+      })
+      this.cookieService.set('todos', JSON.stringify(this.todos))
     }
   }
 }
