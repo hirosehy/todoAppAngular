@@ -1,6 +1,15 @@
 <h2>Todo</h2>
 <ul>
   <li *ngFor="let todo of todos">
-    {{ todo.content }}
+    <div class="input-todo">
+      <input type="radio" />
+      <input type="text" [value]="todo.content" />
+    </div>
+  </li>
+  <li>
+    <div class="input-todo">
+      <input type="radio" />
+      <input type="text"/>
+    </div>
   </li>
 </ul>
