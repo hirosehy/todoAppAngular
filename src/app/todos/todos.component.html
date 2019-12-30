@@ -8,7 +8,6 @@
       <input type="text" [value]="todo.content" />
     </div>
   </li>
-  {{ addText }}
   <li>
     <div class="input-todo">
       <div class="radio-container">
@@ -16,6 +15,7 @@
       </div>
       <input
         type="text"
+        [(ngModel)]="addText"
         (focus)="setShowAddRadio(true)"
         (blur)="onAddBlur($event.target.value)"
         appAutofocus

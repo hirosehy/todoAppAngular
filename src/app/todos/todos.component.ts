@@ -11,7 +11,7 @@ export class TodosComponent implements OnInit {
 
   todos = TODOS
   showAddRadio = false
-  addText = "few"
+  addText = ''
 
   constructor() { }
 
@@ -44,6 +44,7 @@ export class TodosComponent implements OnInit {
         content: value,
         created: new Date()
       })
+      this.addText = ''
     }
     this.setShowAddRadio(false)
   }
