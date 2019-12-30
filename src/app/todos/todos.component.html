@@ -1,29 +1,13 @@
-<h2>Todo</h2>
-<ul>
-  <li *ngFor="let todo of todos">
-    <div class="input-todo">
-      <div class="radio-container">
-        <input type="radio" (change)="done(todo.id)" />
-      </div>
-      <input
-        type="text"
-        [value]="todo.content"
-        (blur)="onUpdateBlur(todo.id, $event.target.value)"
-      />
-    </div>
-  </li>
-  <li>
-    <div class="input-todo">
-      <div class="radio-container">
-        <input type="radio" *ngIf="showAddRadio" />
-      </div>
-      <input
-        type="text"
-        [(ngModel)]="addText"
-        (focus)="setShowAddRadio(true)"
-        (blur)="onAddBlur($event.target.value)"
-        appAutofocus
-      />
-    </div>
-  </li>
-</ul>
+<div>
+  <label>
+    <input type="radio" [(ngModel)]="select" name="select" value="todo" checked />
+    TODO
+  </label>
+  <label>
+    <input type="radio" [(ngModel)]="select" name="select" value="done" />
+    Done
+  </label>
+</div>
+<app-todo-list *ngIf="select === 'todo'" [todos]="todos"></app-todo-list>
+<app-done-list *ngIf="select === 'done'"></app-done-list>
+
