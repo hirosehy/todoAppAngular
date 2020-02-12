@@ -1,0 +1,28 @@
+<ul>
+  <li *ngFor="let l of list">
+    <div class="input-todo">
+      <div class="radio-container">
+        <input type="radio" (click)="onRadioClick(l.id)" [checked]="state === 'done'" />
+      </div>
+      <input
+        type="text"
+        [value]="l.content"
+        [disabled]="state === 'done'"
+        (blur)="onUpdateBlur(l.id, $event.target.value)"
+      />
+    </div>
+  </li>
+  <li *ngIf="state === 'todo'">
+    <div class="input-todo">
+      <div class="radio-container">
+        <input type="radio" *ngIf="showAddRadio" />
+      </div>
+      <input
+        type="text"
+        [(ngModel)]="addText"
+        (focus)="setShowAddRadio(true)"
+        (blur)="onAddBlur($event.target.value)"
+      />
+    </div>
+  </li>
+</ul>

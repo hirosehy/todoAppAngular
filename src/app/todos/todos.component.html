@@ -1,0 +1,11 @@
+<div>
+  <label>
+    <input type="radio" [(ngModel)]="select" name="select" value="todo" checked />
+    TODO
+  </label>
+  <label>
+    <input type="radio" [(ngModel)]="select" name="select" value="done" />
+    Done
+  </label>
+</div>
+<app-todo-list [list]="list" [state]="select" (onClick)="onRadioClick($event)" (emitUpdateBlur)="onUpdateBlur($event)" (emitAddBlur)="onAddBlur($event)"></app-todo-list>
