@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Todo } from '../todo'
-import { CookieService } from 'ngx-cookie-service'
 import { TodosService } from '../../services/todos.service'
 
 @Component({
@@ -15,7 +14,6 @@ export class TodosComponent implements OnInit {
   select: 'todo' | 'done' = 'todo'
 
   constructor(
-    private cookieService: CookieService,
     private todosService: TodosService
   ) { }
 
@@ -34,17 +32,17 @@ export class TodosComponent implements OnInit {
     const index = this.todos.findIndex(t => t.id === id)
     if (this.select === 'todo') {
       this.todos[index].done = new Date()
-      this.cookieService.set('todos', JSON.stringify(this.todos))
+      this.todosService.setTodos(this.todos)
       return
     }
     this.todos[index].done = undefined
-    this.cookieService.set('todos', JSON.stringify(this.todos))
+    this.todosService.setTodos(this.todos)
   }
 
   onUpdateBlur(event) {
     const index = this.todos.findIndex(f => f.id === event.id)
     this.todos[index].content = event.content
-    this.cookieService.set('todos', JSON.stringify(this.todos))
+    this.todosService.setTodos(this.todos)
   }
 
   idGenerate() {
@@ -64,7 +62,7 @@ export class TodosComponent implements OnInit {
         content: value,
         created: new Date()
       })
-      this.cookieService.set('todos', JSON.stringify(this.todos))
+      this.todosService.setTodos(this.todos)
     }
   }
 }
