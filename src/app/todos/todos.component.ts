@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-// import { TODOS } from '../mock-todos'
 import { Todo } from '../todo'
 import { CookieService } from 'ngx-cookie-service'
+import { TodosService } from '../../services/todos.service'
 
 @Component({
   selector: 'app-todos',
@@ -15,16 +15,12 @@ export class TodosComponent implements OnInit {
   select: 'todo' | 'done' = 'todo'
 
   constructor(
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private todosService: TodosService
   ) { }
 
   ngOnInit() {
-    const getTodos = this.cookieService.get('todos')
-    if (!getTodos) {
-      this.cookieService.set('todos', JSON.stringify([]))
-      return
-    }
-    this.todos = JSON.parse(getTodos)
+    this.todos = this.todosService.getTodos()
   }
 
   get list() {
